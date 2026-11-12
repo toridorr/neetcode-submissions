@@ -1,0 +1,181 @@
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        # left, right = 0, len(s)-1
+        # # when left crosses over right then we have reached the middle and can return true
+        # # we also aren't going thru every element in the array, just going until left pointer meets right 
+        # while left < right:
+        #     # moves the left pointer if needed 
+        #     # we need the left < right to check while we are in the while loop that left is still < right pointer 
+        #     # need a while loop here so that the left pointer moves until it reaches a alphanumerical character 
+        #     while left < right and not s[left].isalnum():
+        #         left += 1 
+        #     # moves the right pointer if needed 
+        #     # same reason as above for why this is a nested while loop        
+        #     while left < right and not s[right].isalnum():
+        #         right -= 1
+
+        #     if s[left].lower() != s[right].lower(): 
+        #         return False 
+            
+        #     # we need to move both pointers in by 1 on each side 
+        #     left += 1 
+        #     right -= 1 
+        
+        # return True
+
+        # you want to remove all special characters then compare the forward to the backwards 
+        # how do we remove special characters from a string?
+        # then would you create a new string that contains only the alphanumeric characters 
+        clean_s = ""
+        for char in s:
+            if char.isalnum():
+                clean_s += char 
+        
+        if clean_s.lower() == clean_s.lower()[::-1]: 
+            return True
+        
+        return False 
+
+
+    
+#         Was it a car or a cat I saw?
+#                      LR 
+# Example:
+# 1st loop: left = 0, right = len(s) - 1 = 28 - 1 = 27 --> 0 < 28 --> while loop runs 
+# not s[left].isalnum() means that for this while loop condition to be true the left pointer needs
+# to be pointing to a character that is not alphanumeric. The left pointer is pointing to a letter 
+# so this while loop does not run. 
+# not s[right].isalnum() means that for this while loop condition to be true the right pointer needs
+# to be pointing to a chracter that is not alphanumeric. The right pointer is pointing to a 
+# special character so this while loop condition is true and the nested while loop runs and moves 
+# the right pointer to left so it is pointing to 'w'. We go through the nested while loop again
+# and now the right pointer is pointing to a letter so we break out of this nested while loop. 
+# now we check if the character at the left pointer is the same as the right pointer, so 'W' == 'w'. 
+# These are not equal as they are because uppercase != lowercase so we use .lower() to make them both 
+# lowercase. 'w' == 'w' so this if condition is false. 
+# Now we need to move our pointers in one character. 
+
+# 4th loop: left = 4, right = 23 --> 1 < 23 --> while loop runs 
+# not s[left].isalnum() --> well this is pointing to a blank space so s[left].isalnum() is false 
+# but by putting 'not' in front of it tht makes it true so this 1st nested while loop runs and moves
+# the left pointer 1 character to the left so the left pointer now points to 'i'. This is a alphanumeric
+# character so we break out of this first while loop and move on to the second nested while loop.
+# not s[right].isalnum() --> this is pointing to a blank space so if false but by putting 'not' in front
+# of it it makes this while condition true and runs this second nested while loop. It moves the right 
+# pointer to the left one character so it is now pointing at 'I'. Now that it is pointing to 
+# an alphanumerical it breaks out of this second while loop and moves onto the if statement.
+# Compare letters, 'i' == 'i' so this if conditon does not run. And we move the pointers 
+# in by one. So left = 5 and right = 22 then start the while loop again. 
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        # # BRUTE FORCE SOLUTION: 
+        # # You are going to create an empty string and use the loop to ONLY add 
+        # # letters and numbers. This method then removes all special characters such as 
+        # # question marks and blanks 
+        # cleaned = ""
+        # for char in s:
+        #     if char.isalnum(): # this will run if the loop encounters a letter or digit and will skip if it encounters a special character 
+        #         cleaned += char.lower() # I can make the character lowercase and add it at the same time. Creates "wasitacaroracatisaw"
+        # return cleaned == cleaned[::-1]
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        # # TWO POINTERS SOLUTIONS
+        # # the length of the string in example 1 is 28 but since python is 0 index then we want the right pointer to start at index 27, and that will point at the question mark
+        # left, right = 0, len(s)-1
+        
+        # while left < right: # if left crosses over right then we have a palindrome 
+        #     # Before we jump into comparing, we need to write code to skip over anything that is not alphnumerical
+        #     # 1. Why use a while loop instead of an if statement 
+        #     #       We use while loops instead of an if statement here because a while loop will skip over multiple non-alphanumeric characters in a row.
+        #     #       If we used if instead of while, it would only skip one character, ever if there were multiple non-alphanumerics in a row. 
+        #     # 2. Why have left < right in the nested while loops 
+        #     # It's possible that while you are moving the pointer over to find the next alphanumeric that the left pointer crosses over the right so you need to recheck that condition. This would apply in a case where you have multiple non-alphanumerics in a line like "$%&"
+        #     while left < right and not s[left].isalnum(): # here I had left.isalnum() which would evaluate the index, not the value. So needed to change it to s[left].isalnum(). Also has "and is not". These also should have been while loop instead of if statements. Not sure why? 
+        #         left += 1
+        #     while right > left and not s[right].isalnum(): # same as above
+        #         right -= 1
+#             # Now we can compare 
+#             # This can be an if statement because we are just doing 1 comparison, not comparing until some condition is satisfied. 
+#             if s[left].lower() != s[right].lower(): # Again just needed to evaluate the value, not the index. So instead of left.lower() needed s[left].lower()
+#                 return False
+
+#             left += 1 
+#             right -= 1 
+
+#         return True
+
+# Complexity:
+# You are going through the entire string so O(n)
+# With pointers the space complexity is O(1) because you are only keeping track of the two pointers 
+
+# "Was it a car or a cat I saw?"
+#              R L
+
+# 1ST LOOP: L -> W, R -> ? 
+# left index = 0, right index = 27 => satisfies condition that left < right and can enter in to the 
+# while loop. The left.isalnum() would evaluate to TRUE because the left pointer points to W but we only 
+# want the loop to run if it is not alphnumeric so we put the "is not" in front of it. So then it would 
+# become FASLE. This is like saying "only run this if this character is not alphanumeric". That first if 
+# block condition is false so would move onto the second if block. The right > left -> TRUE and 
+# is not alphanumeric so the condition is TRUE so it would move over 1 space. So the right pointer becomes 
+# R -> w. Now we can go into the while loop and compare letters. 
+# Compare W to w but we use the .lower() method so ensures we are comparing lowercase letters. And 
+# w == w and this is false so it would not run this while loop and then would start the loop over again. 
+
+# 9TH LOOP: L -> r, R -> r 
+# left index = 11, right index = 14  => satisfies condition that left < right and we can enter into the while loop. 
+# Both the if conditions are false so we skip those and then the while loop condition is also false so we start the 
+# while loop again 
+
+# 10TH LOOP: L -> space, R -> o 
+# left index = 12, right index = 13 => satisfies condition that left < right and we can enter into the while loop. 
+# In the first if loop, the left < right -> TRUE and the "is not alphanumeric" is TRUE so the if statement runs and 
+# increments the left pointer 1 space up. So the left pointer moves to "o". R points to a letter so the second if 
+# statement does not run. Then we can compare. left == right so that while loop does not run. The left and right pointers
+# are incremented 1 space. 
+
+# 11TH LOOP: L -> r, R -> blank space 
+# left index = 13, right index = 12 => does NOT satisfy the while loop condition so breaks out of the while loop 
+# and returns TRUE 
+
+ 
+
